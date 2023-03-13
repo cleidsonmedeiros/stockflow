@@ -1,4 +1,10 @@
 class Product < ApplicationRecord
     belongs_to :user
-    has_many :movements
-end
+    has_many :movements, dependent: :destroy
+  
+    validates :name, presence: true
+    validates :description, presence: true
+    validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+    validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  end
+  
